@@ -1,7 +1,7 @@
 {
-  "name": "nestjs-microsmicro",
+  "name": "account",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/nestjs-microsmicro/src",
+  "sourceRoot": "apps/account/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -10,10 +10,10 @@
       "options": {
         "target": "node",
         "compiler": "tsc",
-        "outputPath": "dist/apps/nestjs-microsmicro",
-        "main": "apps/nestjs-microsmicro/src/main.ts",
-        "tsConfig": "apps/nestjs-microsmicro/tsconfig.app.json",
-        "assets": ["apps/nestjs-microsmicro/src/assets"]
+        "outputPath": "dist/apps/account",
+        "main": "apps/account/src/main.ts",
+        "tsConfig": "apps/account/tsconfig.app.json",
+        "assets": ["apps/account/src/assets"]
       },
       "configurations": {
         "production": {
@@ -22,8 +22,8 @@
           "inspect": false,
           "fileReplacements": [
             {
-              "replace": "apps/nestjs-microsmicro/src/environments/environment.ts",
-              "with": "apps/nestjs-microsmicro/src/environments/environment.prod.ts"
+              "replace": "apps/account/src/environments/environment.ts",
+              "with": "apps/account/src/environments/environment.prod.ts"
             }
           ]
         }
@@ -32,11 +32,11 @@
     "serve": {
       "executor": "@nrwl/js:node",
       "options": {
-        "buildTarget": "nestjs-microsmicro:build"
+        "buildTarget": "account:build"
       },
       "configurations": {
         "production": {
-          "buildTarget": "nestjs-microsmicro:build:production"
+          "buildTarget": "account:build:production"
         }
       }
     },
@@ -44,14 +44,14 @@
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["apps/nestjs-microsmicro/**/*.ts"]
+        "lintFilePatterns": ["apps/account/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/nestjs-microsmicro/jest.config.ts",
+        "jestConfig": "apps/account/jest.config.ts",
         "passWithNoTests": true
       }
     }
