@@ -1,0 +1,60 @@
+{
+  "name": "nestjs-microsmicro",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/nestjs-microsmicro/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/nestjs-microsmicro",
+        "main": "apps/nestjs-microsmicro/src/main.ts",
+        "tsConfig": "apps/nestjs-microsmicro/tsconfig.app.json",
+        "assets": ["apps/nestjs-microsmicro/src/assets"]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/nestjs-microsmicro/src/environments/environment.ts",
+              "with": "apps/nestjs-microsmicro/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "nestjs-microsmicro:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "nestjs-microsmicro:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/nestjs-microsmicro/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/nestjs-microsmicro/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
