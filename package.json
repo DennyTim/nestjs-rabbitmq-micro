@@ -5,6 +5,8 @@
   "scripts": {
     "start": "nx serve",
     "all": "nx run-many --target=serve --all --parallel=10",
+    "test-all": "nx run-many --target=test --skip-nx-cache --all --parallel=10",
+    "test-all-sequentially": "nx run-many --target=test  --skip-nx-cache --runInBand",
     "build": "nx build",
     "test": "nx test"
   },
