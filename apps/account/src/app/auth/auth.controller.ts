@@ -4,9 +4,12 @@ import {
 } from "@nestjs-micro/contracts";
 import {
   Body,
-  Controller
+  Controller,
+  Logger
 } from "@nestjs/common";
 import {
+  Message,
+  RMQMessage,
   RMQRoute,
   RMQValidate
 } from "nestjs-rmq";
@@ -19,7 +22,13 @@ export class AuthController {
 
   @RMQValidate()
   @RMQRoute(AccountRegister.topic)
-  async register(@Body() dto: AccountRegister.Request): Promise<AccountRegister.Response> {
+  async register(
+    dto: AccountRegister.Request,
+    @RMQMessage msg: Message
+  ): Promise<AccountRegister.Response> {
+    const requestId = msg.properties.headers['requestId'];
+    const logger = new Logger(requestId);
+    logger.error('Test error')
     return this.authService.register(dto);
   }
 

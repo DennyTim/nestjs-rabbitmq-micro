@@ -4,18 +4,23 @@ import {
 } from "@nestjs-micro/contracts";
 import {
   Body,
-  Controller
+  Controller,
+  Get
 } from "@nestjs/common";
 import {
   RMQRoute,
+  RMQService,
   RMQValidate
 } from "nestjs-rmq";
 import { UserEntity } from "./entities/user.entity";
 import { UserRepository } from "./repositories/user.repository";
 
-@Controller()
+@Controller('')
 export class UserQueries {
-  constructor(private readonly userRepository: UserRepository) {
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly rmqService: RMQService
+  ) {
   }
 
   @RMQValidate()
@@ -33,5 +38,11 @@ export class UserQueries {
     return {
       courses: user.courses
     };
+  }
+
+  @Get('healthcheck')
+  async healthCheck() {
+    // const isRMQ = this.rmqService.healthCheck();
+    // const user = await this.userRepository.healthCheck();
   }
 }

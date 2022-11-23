@@ -23,7 +23,8 @@ export class AuthController {
     try {
       return await this.rmqService.send<AccountRegister.Request, AccountRegister.Response>(
         AccountRegister.topic,
-        dto
+        dto,
+        { headers: { requestId: 'addda'} }
       );
     } catch (e) {
       if (e instanceof Error) {
